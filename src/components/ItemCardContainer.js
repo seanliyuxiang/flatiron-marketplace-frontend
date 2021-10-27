@@ -54,20 +54,30 @@ function ItemCardContainer () {
     //     )
     // }
 
-    function findAssociatedUser(ownerID) {
-        debugger;
-        let targetUser = users.filter(user => {
-            return user.id === ownerID
-        });
-        return targetUser[0];
-    }
+    // function findAssociatedUser(ownerID) {
+    //     debugger;
+    //     let targetUser = users.filter(user => {
+    //         return user.id === ownerID
+    //     });
+    //     return targetUser[0];
+    // }
 
-    function renderItems () {
+    // function renderItems () {
+    //     return (
+    //         items.map (item => {
+    //             let targetUser = findAssociatedUser(item.owner_id);
+    //             return (
+    //                 <ItemCard item={item} key={item.id} targetUser={targetUser} />
+    //             )
+    //         })
+    //     )
+    // }
+
+    function renderItems() {
         return (
-            items.map (item => {
-                let targetUser = findAssociatedUser(item.owner_id);
+            items.map(item => {
                 return (
-                    <ItemCard item={item} key={item.id} targetUser={targetUser} />
+                    <ItemCard item={item} key={item.id} />
                 )
             })
         )
