@@ -7,7 +7,7 @@ function ItemCard({ item, targetUser }) {
             <br></br>
             <h5>Name: {item.name}</h5> <br />
             <h5>Owner ID: {item.owner_id}</h5>
-            <h5>Username: {targetUser.username}</h5>
+            {/* <h5>Username: {targetUser.username}</h5> */}
             <p></p>
 
 
