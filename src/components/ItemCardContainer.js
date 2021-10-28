@@ -3,22 +3,28 @@ import SearchBar from "./SearchBar";
 import ItemCard from "./ItemCard";
 import NewReviewForm from "./NewReviewForm";
 
-function ItemCardContainer () {
-    const [items, setItems] = useState([])
+function ItemCardContainer ({ items, handleDeletion }) {
     const [users, setUsers] = useState([])
     const [reviews, setReviews] = useState([])
 
-    useEffect(() => {
-        fetch("http://localhost:9292/items")
-        .then(response => response.json())
-        .then(data => checkForItems(data))
-    }, []);
+    // creating state to hold search item data
+    const [searchFormData, setSearchFormData] = useState('');
+
+    // capturing what the user types in search items and saving it to `searchFormData`
+    function handleChange(event) {
+        setSearchFormData(event.target.value);
+    }
+
+    // function addNewItem () {
+    //     let updatedItems = [...items, newItem];
+    //     setItems(updatedItems);
+    // }
 
     useEffect(() => {
         fetch("http://localhost:9292/users")
         .then(response => response.json())
         .then(data => checkForUsers(data))
-    }, [setItems]);
+    }, []);
 
     useEffect(() => {
         fetch("http://localhost:9292/reviews")
@@ -26,11 +32,6 @@ function ItemCardContainer () {
         .then(data => checkForReviews(data))
     }, []);
     
-    function checkForItems (data) {
-        if (!!data) {
-            setItems(data)
-        }
-    }
 
     function checkForUsers (data) {
         if (!!data) {
@@ -75,22 +76,25 @@ function ItemCardContainer () {
 
     function renderItems() {
         return (
-            items.map(item => {
+            items.filter(item => {
+                return item.name.toLowerCase().includes(searchFormData.toLowerCase())
+            }).map(item => {
                 return (
-                    <ItemCard item={item} key={item.id} />
+                    <ItemCard item={item} key={item.id} handleDeletion={handleDeletion} />
                 )
             })
         )
     }
 
     return ( 
-        <div className="card-grid">
-
-            <p>Inside Item Card Container</p>
-            <SearchBar />
-            { !!items ? renderItems() : null}
+        <div>
+            <div className="search-bar">
+                <SearchBar handleChange={handleChange} searchFormData={searchFormData} />
+            </div>        
+            <div className="card-grid">
+                {renderItems()}
+            </div>
             <NewReviewForm />
-
         </div>
     )
 
