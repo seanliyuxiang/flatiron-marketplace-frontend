@@ -10,10 +10,19 @@ function App() {
 
   const [items, setItems] = useState([]);
 
+  // define state for users b/c we want to show `username` and `location` on item card
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:9292/items")
     .then(response => response.json())
     .then(data => setItems(data))
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:9292/users")
+    .then(response => response.json())
+    .then(data => setUsers(data))
   }, []);
 
   function handleItemAddition (newItem) {
@@ -45,7 +54,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/Items">
-          <ItemCardContainer items={items} handleDeletion={handleDeletion} />
+          <ItemCardContainer items={items} handleDeletion={handleDeletion} users={users} />
         </Route>
         <Route exact path="/NewItemForm">
           <NewItemForm onItemAddition={handleItemAddition}/>

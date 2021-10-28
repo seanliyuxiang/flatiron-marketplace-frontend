@@ -3,8 +3,8 @@ import SearchBar from "./SearchBar";
 import ItemCard from "./ItemCard";
 import NewReviewForm from "./NewReviewForm";
 
-function ItemCardContainer ({ items, handleDeletion }) {
-    const [users, setUsers] = useState([])
+function ItemCardContainer ({ items, handleDeletion, users }) {
+    
     const [reviews, setReviews] = useState([])
 
     // creating state to hold search item data
@@ -21,23 +21,17 @@ function ItemCardContainer ({ items, handleDeletion }) {
     // }
 
     useEffect(() => {
-        fetch("http://localhost:9292/users")
-        .then(response => response.json())
-        .then(data => checkForUsers(data))
-    }, []);
-
-    useEffect(() => {
         fetch("http://localhost:9292/reviews")
         .then(response => response.json())
         .then(data => checkForReviews(data))
     }, []);
     
 
-    function checkForUsers (data) {
-        if (!!data) {
-            setUsers(data)
-        }
-    }
+    // function checkForUsers (data) {
+    //     if (!!data) {
+    //         setUsers(data)
+    //     }
+    // }
     
     function checkForReviews (data) {
         if (!!data) {
@@ -77,10 +71,14 @@ function ItemCardContainer ({ items, handleDeletion }) {
     function renderItems() {
         return (
             items.filter(item => {
+                // filtering and mapping in the same component b/c there's no middle component
                 return item.name.toLowerCase().includes(searchFormData.toLowerCase())
             }).map(item => {
+                // find the user object that owns this item and pass it as prop to `ItemCard` component
+                const owner = users.find(singleUser => singleUser.id === item.owner_id);
+
                 return (
-                    <ItemCard item={item} key={item.id} handleDeletion={handleDeletion} />
+                    <ItemCard item={item} key={item.id} handleDeletion={handleDeletion} owner={owner} />
                 )
             })
         )
