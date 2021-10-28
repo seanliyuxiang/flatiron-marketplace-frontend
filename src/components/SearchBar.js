@@ -1,11 +1,16 @@
 import React from 'react';
 
-function SearchBar () {
+function SearchBar ({ searchFormData, handleChange }) {
     return (
         <div>
-            Inside Search Bar
+            <input
+                type="text"
+                placeholder="Search item by name here"
+                onChange={handleChange}
+                value={searchFormData}
+            />
         </div>
-    )
+    );
 }
 
 export default SearchBar;
