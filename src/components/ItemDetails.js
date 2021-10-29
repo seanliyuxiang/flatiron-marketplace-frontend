@@ -38,7 +38,9 @@ function ItemDetails ({ items, users }) {
         if (!!reviews) {
             return (
                 <>
-                    <h4>Reviews</h4>
+                    <h4>Customer Reviews</h4>
+                    <h4>⭐⭐⭐⭐⭐<span> {reviews.length}</span></h4>
+                    <h4>{reviews.length === 0 ? 0 : (reviews.map(r => r.rating).reduce((a,b) => a+b)/reviews.length).toFixed(1)} out of 5 stars</h4>
                     {reviews.map(each => {
                         // find the reviewer object
                         const foundReviewer = users.find(singleUser => singleUser.id === each.reviewer_id);
