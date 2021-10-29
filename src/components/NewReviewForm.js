@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 function NewReviewForm ({ itemID, users, onReviewAddition }) {
-
     const [newReviewFormData, setNewReviewFormData] = useState({
         body: '',
         rating: '',
@@ -10,22 +9,14 @@ function NewReviewForm ({ itemID, users, onReviewAddition }) {
     });
 
     function handleChange (event) {
-        console.log("event target name", event.target.name)
-        console.log("event target value", event.target.value)
-
         setNewReviewFormData({
             ...newReviewFormData, [event.target.name]: event.target.value
         })
     }
 
     function handleSubmit (event) {
-        //newReviewFormData has been updated while the user types in their response
-        //when they click the submit button we will POST the entire newReviewFormData object
         event.preventDefault();
-        console.log(event)
-        console.log(newReviewFormData)
 
-        // fetch POST
         fetch("http://localhost:9292/reviews", {
             method: "POST",
             headers: {
@@ -45,26 +36,25 @@ function NewReviewForm ({ itemID, users, onReviewAddition }) {
     }
 
     function renderDropdown () {
-        console.log(users)
         if (!!users) {
             return (
                 <>
-                <select name="reviewer_id" onChange={handleChange}> 
-                    <option selected value="Click your username" >Click your username</option>
-    
-                    {users.map(each => {
-                        return (
-                            <option key={each.id} value={each.id}>{each.username}</option>
-                        )
-                    })}
-                </select>
+                    <select name="reviewer_id" onChange={handleChange}> 
+                        <option defaultValue="Click your username" >Click your username</option>
+                        {users.map(each => {
+                            return (
+                                <option key={each.id} value={each.id}>{each.username}</option>
+                            )
+                        })}
+                    </select>
                 </>
             )
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="newReviewForm" onSubmit={handleSubmit}>
+            Leave a review for this item:
             <input
                 type='text'
                 name='body'
@@ -74,18 +64,17 @@ function NewReviewForm ({ itemID, users, onReviewAddition }) {
             />
             <input
                 type='number'
+                min="0"
+                max="5"
                 name='rating'
-                placeholder='Rate this item from 0 - 10'
+                placeholder='Rate this item from 0 - 5'
                 value={newReviewFormData.rating}
                 onChange={handleChange}
             />
-
             {renderDropdown()}
-
             <button type='submit' className="review-button">Submit Review</button>
         </form>
     )
-
 }
 
 export default NewReviewForm;
