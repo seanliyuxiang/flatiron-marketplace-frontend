@@ -40,7 +40,7 @@ function NewReviewForm ({ itemID, users, onReviewAddition }) {
             body: '',
             rating: '',
             item_id: itemID,
-            reviewer_id: 0
+            reviewer_id: newReviewFormData.reviewer_id
         })
     }
 
