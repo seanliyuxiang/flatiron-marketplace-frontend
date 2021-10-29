@@ -1,3 +1,17 @@
+# Project Contributors
+Abby, Gabriel, and Sean
+
+## To get the frontend server going, run:
+npm install
+npm start
+
+## To get this up and running in the backend, run:
+bundle install
+rake db:reset (which will drop, migrate, and then seed db)
+rake server
+
+### The below text comes from Canvas
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

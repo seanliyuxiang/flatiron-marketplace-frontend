@@ -4,12 +4,11 @@ import {NavLink} from 'react-router-dom';
 const linkStyles = {
     padding: "10px 15px 10px 15px",
     margin: "10px 10px 10px 10px",
-    background: "#db0000",
     textDecoration: "none",
     color: "white",
     justifyContent: "center",
     textAlign: "center",
-    borderRadius: "8px",
+    borderRadius: "0px",
   };
   
 function NavBar () {
@@ -22,33 +21,34 @@ function NavBar () {
             style={linkStyles}
             className="nav-bar-route"
             activeStyle={{
-                background: "#ff7a7a",
-                cursor: 'pointer',
-              }}
-            >
-                Home
+              cursor: 'pointer',
+              hover: {
+                color: '#FF0000'
+              }
+            }}>
+              Home
             </NavLink>
+            
             <NavLink 
             to='/Items'            
             exact
             style={linkStyles}
             className="nav-bar-route"
             activeStyle={{
-                background: "#ff7a7a",
-                cursor: 'pointer'
-              }}>
-                Marketplace
+              cursor: 'pointer'
+            }}>
+              Marketplace
             </NavLink>
+            
             <NavLink 
             to='/NewItemForm'
             exact
             style={linkStyles}
             className="nav-bar-route"
             activeStyle={{
-                background: "#ff7a7a",
-                cursor:'pointer'
-              }}>
-                Sell Your Stuff!
+              cursor:'pointer'
+            }}>
+              Sell Your Stuff!
             </NavLink>
         </div>
     )
