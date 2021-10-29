@@ -16,7 +16,7 @@ body {
     background-attachment: fixed;
 }
 
-.search-bar{
+.searchbar{
   padding-top: 20px;
   position: relative;
   justify-content: center;
@@ -24,11 +24,21 @@ body {
   display: flex;
 }
 
+.searchbar input {
+  width: 70%;
+  font-size: 1rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding-left: 1rem;
+}
+
 .cardImage {
     height: 200px;
     /* position: relative; */
     top: 50px;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     
 }
@@ -65,8 +75,31 @@ body {
     padding: 10px;
 }
 
+.card p {
+  margin: 0
+}
 
-.header{
+#itemName {
+  /* display: inline;
+  /* text-align: left; */
+  /* justify-content: left;  */
+  /* float: left; */
+  font-weight: bold;
+}
+
+#itemPrice {
+  /* display:;
+  text-align: right;
+  justify-content: right; */
+  float: right;
+}
+
+.delete {
+  float: right;
+
+}
+
+/* .header{
     font-size: 1.25em;
     padding-left: 0rem;
     color:white;
@@ -74,13 +107,23 @@ body {
     background-color: black;
     text-align: center;
     font-size: 30px 
-}
+} */
 .nav-bar{
   position: relative;
   justify-content: center;
   align-items: center;
   display: flex;
-  
+  animation: forwards;
+  font-size: 1.25em;
+  padding-left: 0rem;
+  color:white;
+  text-shadow: 0 0 0 var(--green);
+  background-color: black;
+  text-align: center;
+  font-size: 15px 
+}
+.nav-bar.h1{
+  float:left
 }
 
 .Logo{
@@ -91,17 +134,46 @@ body {
   align-items: center;
 }
 
+/* container for form */
 .newItemForm {
-  padding-top: 20px;
   position: relative;
   justify-content: center;
   align-items: center;
   display: flex;
 }
+/* elements inside form */
 .item-form {
-  margin: 10px 20px 10px 20px;
+  margin: 1rem;
   position: relative;
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-flow: column wrap
+}
+
+.formHeader {
+  text-align: center;
+}
+
+.itemReviews{
+  border-radius: 10px;
+  border-style: solid;
+  padding: 10px 5px 10px 5px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex; 
+  flex-direction: column;
+  margin: 2rem 275px 375px 275px;
+  background-color:burlywood
+
+}
+.review-button{
+  background-color: rgb(43, 230, 43);
+}
+
+.eachReview {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import {Redirect} from 'react-router-dom'; 
 
-function NewItemForm ({onItemAddition}) {
+function NewItemForm ({onItemAddition, users}) {
+
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -8,9 +10,13 @@ function NewItemForm ({onItemAddition}) {
         price: "",
         owner_id: ""
     })
+    const [redirect, setRedirect] = useState(false)
 
     function handleChange (event) {
         // save `name` and `value` attributes into variables
+        console.log("select name", event.target.name)
+        console.log("id number for chosen user", event.target.value)
+
         let eventTargetName = event.target.name;
         let eventTargetValue = event.target.value;
 
@@ -42,6 +48,7 @@ function NewItemForm ({onItemAddition}) {
         })
         .then(response => response.json())
         .then(newItem => onItemAddition(newItem))
+        .then(setRedirect(true));
 
         // clear out all input fields
         setFormData({
@@ -53,24 +60,55 @@ function NewItemForm ({onItemAddition}) {
         });
     }
 
+    if (redirect) {
+        return <Redirect to="/Items" />
+    }
 
+    function renderUsers () {
+        if (!!users) {
+            return (
+                <>
+                {/* <label> Choose from existing user</label> */}
+                <select name="owner_id" onChange={handleChange}>
+                    <option selected value ="Click to choose your username">Click to choose your username</option>
+    
+                    {users.map(each => {
+                        return (
+                            <option key={each.id} value={each.id}>{each.username}</option>
+                        )
+    
+                    })}
+    
+                </select>
+                </>
+            )
+        }
+
+    }
 
     return (
-        <div className="newItemForm">
-            Inside New Item Form
-            <form onSubmit={handleSubmit} className="item-form">
-                <input type="text" name="name" placeholder="Item name" value={formData.name} onChange={handleChange} />
+        <div>
+            <div className="formHeader" >
+                <h3>Ready to sell something? </h3>
+            </div>
 
-                <input type="text" name="description" placeholder="Item description" value={formData.description} onChange={handleChange} />
+            <div className="newItemForm">
+                <form onSubmit={handleSubmit} className="item-form">
+                    <input type="text" name="name" placeholder="Item name" value={formData.name} onChange={handleChange} />
 
-                <input type="url" name="image_url" placeholder="URL for item image" value={formData.image_url} onChange={handleChange} />
+                    <input type="text" name="description" placeholder="Item description" value={formData.description} onChange={handleChange} />
 
-                <input type="number" name="price" step="0.01" placeholder="Item price" value={formData.price} onChange={handleChange} />
+                    <input type="url" name="image_url" placeholder="URL for item image" value={formData.image_url} onChange={handleChange} />
 
-                <input type="text" name="owner_id" placeholder="Item owner ID" value={formData.owner_id} onChange={handleChange} />
+                    <input type="number" name="price" step="0.01" placeholder="Item price" value={formData.price} onChange={handleChange} />
 
-                <button type="submit">Add Item</button>
-            </form>
+                    {/* <input type="text" name="owner_id" placeholder="Item owner ID" value={formData.owner_id} onChange={handleChange} /> */}
+
+                    {renderUsers()}
+
+                    <button type="submit">Add Item</button>
+                </form>
+            </div>
         </div>
     )
 }

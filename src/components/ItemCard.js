@@ -1,19 +1,22 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-function ItemCard({ item, targetUser, handleDeletion, owner }) {
+function ItemCard({ item, handleDeletion, owner }) {
     return (
         <div className="card">
             <img className="cardImage" src={item.image_url} alt={item.name}/>
             <div className="cardText">
-                <p>{item.name}</p>
-                <p>posted by: {owner.username} in -{owner.location}-</p>
-                {/* <h5>Username: {targetUser.username}</h5> */}
+                    <p>
+                        <span id="itemName">{item.name}</span>
+                        <span id="itemPrice">${item.price}</span>
+                    </p>
+
+                {!owner ? <p>Seller: Anonymous</p> : <p>Seller: {owner.username}, {owner.location}</p>}
             </div>
-            <button className="delete" onClick={() => handleDeletion(item)}>Delete item</button>
-
-
+            <button className="deleteButton" onClick={() => handleDeletion(item)}> 🗑 </button>
+            <Link to={`/Items/${item.id}`}>Item details</Link>
         </div>
     )
-}
+};
 
 export default ItemCard;

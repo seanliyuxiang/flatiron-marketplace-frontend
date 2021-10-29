@@ -2,7 +2,7 @@ import React from 'react';
 
 function SearchBar ({ searchFormData, handleChange }) {
     return (
-        <div>
+        <div className="searchbar">
             <input
                 type="text"
                 placeholder="Search item by name here"

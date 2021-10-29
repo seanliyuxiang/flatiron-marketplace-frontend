@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import SearchBar from "./SearchBar";
 import ItemCard from "./ItemCard";
-import NewReviewForm from "./NewReviewForm";
 
 function ItemCardContainer ({ items, handleDeletion, users }) {
     
-    const [reviews, setReviews] = useState([])
+    // const [reviews, setReviews] = useState([])
 
     // creating state to hold search item data
     const [searchFormData, setSearchFormData] = useState('');
@@ -20,11 +19,11 @@ function ItemCardContainer ({ items, handleDeletion, users }) {
     //     setItems(updatedItems);
     // }
 
-    useEffect(() => {
-        fetch("http://localhost:9292/reviews")
-        .then(response => response.json())
-        .then(data => checkForReviews(data))
-    }, []);
+    // useEffect(() => {
+    //     fetch("http://localhost:9292/reviews")
+    //     .then(response => response.json())
+    //     .then(data => checkForReviews(data))
+    // }, []);
     
 
     // function checkForUsers (data) {
@@ -33,11 +32,11 @@ function ItemCardContainer ({ items, handleDeletion, users }) {
     //     }
     // }
     
-    function checkForReviews (data) {
-        if (!!data) {
-            setReviews(data)
-        }
-    }
+    // function checkForReviews (data) {
+    //     if (!!data) {
+    //         setReviews(data)
+    //     }
+    // }
 
     // function renderUsers () {
     //     return (
@@ -92,10 +91,8 @@ function ItemCardContainer ({ items, handleDeletion, users }) {
             <div className="card-grid">
                 {renderItems()}
             </div>
-            <NewReviewForm />
         </div>
     )
-
 }
 
 export default ItemCardContainer;

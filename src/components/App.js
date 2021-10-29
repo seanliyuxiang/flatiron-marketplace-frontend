@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import Header from "./Header";
+// import Header from "./Header";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import ItemCardContainer from "./ItemCardContainer";
 import NewItemForm from "./NewItemForm";
+import ItemDetails from "./ItemDetails";
 
 function App() {
-
+  // fetching and setting state for items, since we want to get that data here and pass it down through ItemCardContainer to the ItemCard components
   const [items, setItems] = useState([]);
 
   // define state for users b/c we want to show `username` and `location` on item card
@@ -47,7 +48,7 @@ function App() {
 
   return (
     <div className= "app">
-      <Header />
+      {/* <Header /> */}
       <NavBar />
       <Switch>
         <Route exact path="/">
@@ -57,7 +58,10 @@ function App() {
           <ItemCardContainer items={items} handleDeletion={handleDeletion} users={users} />
         </Route>
         <Route exact path="/NewItemForm">
-          <NewItemForm onItemAddition={handleItemAddition}/>
+          <NewItemForm onItemAddition={handleItemAddition} users={users}/>
+        </Route>
+        <Route path="/Items/:id">
+          <ItemDetails items={items} users={users} />
         </Route>
       </Switch>
     </div>
