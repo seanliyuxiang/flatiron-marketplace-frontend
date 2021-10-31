@@ -5,6 +5,9 @@ Abby, Gabriel, and Sean
 npm install
 npm start
 
+## GitHub URL to the backend repo of this app:
+https://github.com/seanliyuxiang/flatiron-marketplace-backend
+
 ## To get this up and running in the backend, run:
 bundle install
 rake db:reset (which will drop, migrate, and then seed db)
